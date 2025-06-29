@@ -1,26 +1,52 @@
-# compiled output
+### Build & Compiled Output ###
 /dist
-/node_modules
-/node-compile-cache
 /build
+/out-tsc
+/tmp
+/node-compile-cache
+**/dist/
+**/node_modules/
 
-# Logs
-logs
+### Dependencies ###
+/node_modules
+
+### Logs ###
+/logs
 *.log
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+/libpeerconnection.log
+testem.log
 
-# OS
-.DS_Store
+### Runtime & Cache ###
+.temp
+.tmp
+/.nx
+/connect.lock
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# Tests
+### Testing & Coverage ###
 /coverage
 /.nyc_output
+/test-output
 
-# IDEs and editors
+### Environment Variables ###
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### IDEs & Editors ###
 /.idea
 .project
 .classpath
@@ -28,39 +54,31 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
+/.sass-cache
+/typings
 
-# IDE - VSCode
+### VSCode ###
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+### System Files ###
+.DS_Store
+Thumbs.db
 
-# temp directory
-.temp
-.tmp
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
+### Generated Files ###
 /generated/prisma
-
-# generated GraphQL types
 /src/@generated
 /src/gql/schema.gql
-# docs & diagrams
-/docs
+
+### Documentation ###
+/prisma/docs
 /prisma/ERD.md
+
+### Nx Workspace
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+test-output

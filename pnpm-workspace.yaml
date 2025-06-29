@@ -1,8 +1,3 @@
-onlyBuiltDependencies:
-  - '@apollo/protobufjs'
-  - '@nestjs/core'
-  - '@prisma/client'
-  - '@prisma/engines'
-  - '@scarf/scarf'
-  - '@swc/core'
-  - prisma
+packages:
+  - 'apps/*'
+  - 'libs/prisma'

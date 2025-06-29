@@ -1,0 +1,60 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./src/@generated/client"
+}
+
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "./src/@generated"
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
+model Post {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  textContent String?
+  media       Media[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([userId, createdAt])
+}
+
+model Media {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  publicId     String   @unique
+  secureUrl    String
+  resourceType String
+  createdAt    DateTime @default(now())
+  postId       String?  @db.ObjectId
+  post         Post?    @relation(fields: [postId], references: [id])
+
+  format      String
+  width       Int?
+  height      Int?
+  bytes       Int
+  duration    Float?
+  playbackUrl String?
+
+  @@index([postId])
+  @@index([resourceType])
+  @@index([postId, createdAt])
+}

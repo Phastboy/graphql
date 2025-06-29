@@ -1,173 +1,82 @@
-# 📦 GraphQL API with NestJS, Prisma & MongoDB
+# Boundless
 
-A robust GraphQL API built with **NestJS**, **Apollo Server**, **Prisma ORM**, and **MongoDB**, tailored for managing social media-style posts with media uploads. The project includes a modular structure, real-time GraphQL subscriptions, media upload via Cloudinary, and REST support with Swagger docs.
+<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
----
+✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
 
-## 🛠 Features
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
-- 📡 GraphQL API with `@nestjs/graphql` & Apollo Server
-- 🔔 Real-time subscriptions using `graphql-subscriptions`
-- ⚙️ Code-first GraphQL schema generation
-- 🟢 MongoDB with Prisma ORM
-- ✅ Input validation via `class-validator`
-- 📁 Modular and scalable architecture
-- 🧾 Error formatting for cleaner GraphQL responses
-- ☁️ Cloudinary integration for media handling
-- 🖼️ Image & video optimization
-- 📊 Swagger documentation for REST endpoints
-- 🔄 Cursor-based pagination for posts
+## Finish your CI setup
 
----
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/KbyQelmmbk)
 
-## 🚀 Getting Started
 
-### 1. Clone & Install
+## Run tasks
 
-```bash
-git clone https://github.com/phastboy/graphql.git
-cd graphql
+To run the dev server for your app, use:
+
+```sh
+npx nx serve boundless
 ```
 
----
+To create a production bundle:
 
-### 2. Set up Environment
-
-Create a `.env` file in the root:
-
-```env
-DATABASE_URL="mongodb+srv://<user>:<password>@cluster.mongodb.net/mydb?retryWrites=true&w=majority"
-PORT=3000
-
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-# Media Limits (optional)
-MAX_FILE_SIZE=10485760 # 10MB
-MAX_FILES=10
+```sh
+npx nx build boundless
 ```
 
-### 3. Database Setup
+To see all available targets to run for a project, run:
 
-```bash
-# Generate Prisma client & push schema to database
-pnpm install
+```sh
+npx nx show project boundless
 ```
 
----
+These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
-## 🥪 Running the App
+[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-```bash
-# Dev mode
-pnpm dev
+## Add new projects
 
-# Production mode
-pnpm build && pnpm start:prod
+While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+
+Use the plugin's generator to create new projects.
+
+To generate a new application, use:
+
+```sh
+npx nx g @nx/node:app demo
 ```
 
-Access GraphQL Playground at: `http://localhost:3000/graphql`
+To generate a new library, use:
 
----
-
-## 🔍 Sample Operations
-
-### Create Post with Subscription
-
-```graphql
-mutation {
-  createPost(input: { textContent: "Hello World!" }) {
-    id
-    textContent
-  }
-}
-
-subscription {
-  postCreated {
-    id
-    textContent
-  }
-}
+```sh
+npx nx g @nx/node:lib mylib
 ```
 
-### Query Posts
+You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
 
-```graphql
-query {
-  posts(take: 10) {
-    data {
-      id
-      textContent
-      createdAt
-    }
-    nextCursor
-  }
-}
-```
+[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-### Upload Media (REST)
 
-```curl
-curl -X POST \
-  -H "Content-Type: multipart/form-data" \
-  -F "files=@photo.jpg" \
-  -F "files=@video.mp4" \
-  http://localhost:3000/media/upload
-```
+[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
----
+## Install Nx Console
 
-## 🧰 Development Commands
+Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
 
-| Command                  | Description                          |
-| ------------------------ | ------------------------------------ |
-| `pnpm run dev`           | Run in dev mode with file watching   |
-| `pnpm run lint`          | Run ESLint with auto-fix             |
-| `pnpm run test`          | Run unit tests                       |
-| `pnpm run prisma:studio` | Open Prisma Studio for data browsing |
+[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
----
+## Useful links
 
-🛠 Technical Highlights
+Learn more:
 
-- Cloudinary Integration: For efficient media storage & delivery
-- REST Upload Endpoint: With size/type validation
-- Real-time GraphQL: Subscriptions push new post updates instantly
-- Robust Validation: Including custom validators
-- Cursor Pagination: For optimal post loading
-- API Documentation: Accessible Swagger UI for REST
+- [Learn more about this workspace setup](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
----
-
-📚 Documentation
-
-- Auto-generated GraphQL schema: `src/@generated/schema.gql`
-- Prisma-generated types: `src/@generated`
-- REST API Docs: `http://localhost:3000/api/docs`
-
----
-
-## 🐳 Docker Deployment
-
-```bash
-docker build -t graphql .
-docker run -p 3000:3000 --env-file .env graphql
-```
-
----
-
-## Resources
-
-- [NestJS Documentation](https://docs.nestjs.com)
-- [Prisma Documentation](https://www.prisma.io/docs)
-- [GraphQL Subscriptions](https://www.apollographql.com/docs/graphql-subscriptions/)
-
----
-
-## 📄 License
-
-UNLICENSED
-
----
+And join the Nx community:
+- [Discord](https://go.nx.dev/community)
+- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
+- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
+- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
